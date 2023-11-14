@@ -1,17 +1,17 @@
 import { type FC } from 'react'
 import { Avatar, AvatarFallback, AvatarImage } from '@/shared/ui/avatar'
-import { IUser } from '../type'
 
 interface UserAvatarProps {
-  user: IUser
+  username: string
+  src?: string
 }
 
-export const UserAvatar: FC<UserAvatarProps> = ({ user }) => {
-  const fallbackText = user.firstName[0] + user.lastName[0]
+export const UserAvatar: FC<UserAvatarProps> = ({ username, src }) => {
+  const fallbackText = username.substring(0, 2).toUpperCase()
 
   return (
     <Avatar>
-      <AvatarImage src={user.avatarSrc} />
+      <AvatarImage src={src} />
       <AvatarFallback>{fallbackText}</AvatarFallback>
     </Avatar>
   )

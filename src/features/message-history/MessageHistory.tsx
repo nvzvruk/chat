@@ -1,31 +1,28 @@
 import { type FC } from 'react'
 import { useQuery } from 'react-query'
 import { type IMessageDTO, Message } from '@/entities/message'
-import { getMessages } from './api/getMessages'
 import { Loader } from '@/shared/ui/loader'
 import { ScrollContainer } from '@/shared/ui/scroll-container'
+import { apiService } from '@/shared/services'
 
 interface MessageHistoryProps {}
 // TODO: lazy load by page, virtualization?
 export const MessageHistory: FC<MessageHistoryProps> = () => {
-  const { data, error, isLoading } = useQuery<IMessageDTO[], string>(
-    'messages',
-    getMessages
-  )
+  const { data, error, isLoading } = useQuery<IMessageDTO[], string>({
+    queryKey: 'messages',
+    queryFn: () => apiService.get('/message/all'),
+  })
 
   const renderMessage = (message: IMessageDTO) => {
-    return (
-      <>
-        <Message key={message.id} message={message} isUserMessage={false} />
-      </>
-    )
+    return <Message key={message.id} message={message} isUserMessage={false} />
   }
 
   if (isLoading) return <Loader />
 
   if (error) {
-    // Todo display error
+    // TODO display error
   }
+
   if (data)
     return data.length > 0 ? (
       <ScrollContainer>

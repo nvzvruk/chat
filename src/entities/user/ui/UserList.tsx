@@ -1,19 +1,16 @@
 import { type FC } from 'react'
 import { Card } from '@/shared/ui/card'
-import { Avatar, AvatarImage, AvatarFallback } from '@/shared/ui/avatar'
-import { type IUserDto } from '../type'
+import { type User } from '../type'
+import { UserAvatar } from './UserAvatar'
 
 interface UserListProps {
-  users: IUserDto[]
+  users: User[]
 }
 
 export const UserList: FC<UserListProps> = ({ users }) => {
-  const renderUser = ({ id, name }: IUserDto) => (
+  const renderUser = ({ id, name }: User) => (
     <Card key={id} className="flex items-center gap-4 p-4">
-      <Avatar>
-        <AvatarImage src="/avatars/01.png" />
-        <AvatarFallback>{name.substring(0, 2).toUpperCase()}</AvatarFallback>
-      </Avatar>
+      <UserAvatar username={name} />
       <p className="text-sm font-medium leading-none">{name}</p>
     </Card>
   )

@@ -1,11 +1,9 @@
-export interface IUser {
-  id: string
-  firstName: string
-  lastName: string
-  avatarSrc?: string
-}
-
-export interface IUserDto {
+export interface User {
   id: string
   name: string
+  email: string
+}
+
+export interface UserDto extends User {
+  accessToken: string
 }

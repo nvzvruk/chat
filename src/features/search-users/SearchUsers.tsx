@@ -1,25 +1,21 @@
-import { FC, ChangeEvent, useState } from 'react'
+import { ChangeEvent, useState } from 'react'
 import { useQuery } from 'react-query'
 import { MagnifyingGlassIcon } from '@heroicons/react/24/solid'
-import { IUserDto, UserList } from '@/entities/user'
+import { UserDto, UserList } from '@/entities/user'
 import { Loader } from '@/shared/ui/loader'
 import { Input } from '@/shared/ui/input'
-import { useDebounce } from '@/shared/hooks/useDebounce'
-import { getUsers } from './api/get-users'
+import { useDebounce } from '@/shared/hooks'
+import { apiService } from '@/shared/services'
 
-interface SearchUsersProps {
-  // Props here if needed
-}
-
-export const SearchUsers: FC<SearchUsersProps> = () => {
+export const SearchUsers = () => {
   const [query, setQuery] = useState('')
 
-  const { data, error, isLoading } = useQuery<IUserDto[], string>(
-    ['users', query],
-    getUsers
-  )
+  const { data, error, isLoading } = useQuery<UserDto[], string>({
+    queryKey: 'users',
+    queryFn: () => apiService.get('/user/all'),
+  })
 
-  const onChange = async (e: ChangeEvent<HTMLInputElement>) => {
+  const handleSearchChange = async (e: ChangeEvent<HTMLInputElement>) => {
     setQuery(e.target.value)
   }
 
@@ -30,7 +26,7 @@ export const SearchUsers: FC<SearchUsersProps> = () => {
           <MagnifyingGlassIcon className="absolute right-3 top-[50%] -translate-y-[50%] w-4 fill-foreground pointer-events-none" />
           <Input
             placeholder="Search users..."
-            onChange={useDebounce(onChange, 500)}
+            onChange={useDebounce(handleSearchChange, 500)}
           />
         </div>
       </div>

@@ -4,6 +4,9 @@ import { Configuration } from 'webpack'
 import 'webpack-dev-server'
 // @ts-ignore
 import HtmlWebpackPlugin from 'html-webpack-plugin'
+// @ts-ignore
+import MiniCssExtractPlugin from 'mini-css-extract-plugin'
+import { BundleAnalyzerPlugin } from 'webpack-bundle-analyzer'
 import { BuildOptions } from './types'
 
 export function createWebpackConfig({
@@ -44,13 +47,16 @@ export function createWebpackConfig({
       ],
     },
     plugins: [
+      new MiniCssExtractPlugin(),
       new HtmlWebpackPlugin({
         template: 'public/index.html',
       }),
+      new BundleAnalyzerPlugin(),
     ],
     devServer: {
       compress: true,
       port: port,
+      historyApiFallback: true,
       static: {
         directory: path.join(__dirname, '../public'),
       },

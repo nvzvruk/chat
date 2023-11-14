@@ -1,13 +1,7 @@
 import React from 'react'
 import { createRoot } from 'react-dom/client'
+import { QueryClient, QueryClientProvider } from 'react-query'
 import { App } from './app'
-import {
-  useQuery,
-  useMutation,
-  useQueryClient,
-  QueryClient,
-  QueryClientProvider,
-} from 'react-query'
 
 const rootElement = document.getElementById('app')
 
