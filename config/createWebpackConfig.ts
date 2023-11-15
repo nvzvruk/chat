@@ -1,4 +1,3 @@
-import { loader as miniCssLoader } from 'mini-css-extract-plugin'
 import * as path from 'path'
 import { Configuration } from 'webpack'
 import 'webpack-dev-server'
@@ -34,7 +33,7 @@ export function createWebpackConfig({
           test: /\.css$/,
           include: path.resolve(__dirname, '../src'),
           use: [
-            isDev ? 'style-loader' : miniCssLoader,
+            isDev ? 'style-loader' : MiniCssExtractPlugin.loader,
             'css-loader',
             'postcss-loader',
           ],
@@ -51,7 +50,9 @@ export function createWebpackConfig({
       new HtmlWebpackPlugin({
         template: 'public/index.html',
       }),
-      new BundleAnalyzerPlugin(),
+      new BundleAnalyzerPlugin({
+        openAnalyzer: false,
+      }),
     ],
     devServer: {
       compress: true,

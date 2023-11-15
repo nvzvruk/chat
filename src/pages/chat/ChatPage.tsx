@@ -6,7 +6,7 @@ import { PageLayout } from '@/widgets/PageLayout'
 export const ChatPage = () => {
   return (
     <PageLayout sidebarContent={<SearchUsers />}>
-      <div className="flex flex-col gap-4">
+      <div className="flex flex-col gap-4 grow">
         <MessageHistory />
         <footer>
           <SendMessage />

@@ -1,7 +1,8 @@
 import React from 'react'
 import { createRoot } from 'react-dom/client'
 import { QueryClient, QueryClientProvider } from 'react-query'
-import { App } from './app'
+import { App } from '@/app'
+import { ThemeProvider } from '@/features/theme'
 
 const rootElement = document.getElementById('app')
 
@@ -13,6 +14,8 @@ const queryClient = new QueryClient()
 
 root.render(
   <QueryClientProvider client={queryClient}>
-    <App />
+    <ThemeProvider>
+      <App />
+    </ThemeProvider>
   </QueryClientProvider>
 )

@@ -13,7 +13,7 @@ export const PageLayout: FC<PageLayoutProps> = ({
 }) => {
   return (
     <div className="flex gap-4 p-4 w-full h-full">
-      <aside className="w-2/5 lg:w-1/4">
+      <aside className="w-3/7 xl:w-1/4">
         <Sidebar />
       </aside>
 
