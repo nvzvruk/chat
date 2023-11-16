@@ -1,5 +1,5 @@
 import axios, { AxiosError } from 'axios'
-import Cookies from 'js-cookie'
+import { localStorageService } from '@/shared/services'
 
 const API_BASE_URL = 'http://localhost:3002'
 
@@ -12,7 +12,7 @@ const axiosInstance = axios.create({
 })
 
 axiosInstance.interceptors.request.use((config) => {
-  const accessToken = Cookies.get('access_token')
+  const accessToken = localStorageService.getItem('access_token')
 
   if (accessToken) {
     config.headers.Authorization = `Bearer ${accessToken}`

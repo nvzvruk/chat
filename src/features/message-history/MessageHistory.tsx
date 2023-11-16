@@ -1,6 +1,6 @@
 import { type FC } from 'react'
 import { useQuery } from 'react-query'
-import { ChatBubbleBottomCenterIcon } from '@heroicons/react/24/solid'
+import { ChatBubbleBottomCenterIcon } from '@heroicons/react/24/outline'
 import { type IMessageDTO, Message } from '@/entities/message'
 import { Loader } from '@/shared/ui/loader'
 import { ScrollContainer } from '@/shared/ui/scroll-container'
