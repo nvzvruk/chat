@@ -1,4 +1,4 @@
-import axios from 'axios'
+import axios, { AxiosError } from 'axios'
 import Cookies from 'js-cookie'
 
 const API_BASE_URL = 'http://localhost:3002'
@@ -20,6 +20,8 @@ axiosInstance.interceptors.request.use((config) => {
 
   return config
 })
+
+export interface ApiServiceError extends AxiosError {}
 
 export const apiService = {
   get: async <T>(url: string, params?: any) => {

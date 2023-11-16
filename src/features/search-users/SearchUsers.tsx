@@ -5,12 +5,12 @@ import { UserDto, UserList } from '@/entities/user'
 import { Loader } from '@/shared/ui/loader'
 import { Input } from '@/shared/ui/input'
 import { useDebounce } from '@/shared/hooks'
-import { apiService } from '@/shared/services'
+import { apiService, ApiServiceError } from '@/shared/services'
 
 export const SearchUsers = () => {
   const [query, setQuery] = useState('')
 
-  const { data, error, isLoading } = useQuery<UserDto[], string>({
+  const { data, error, isLoading } = useQuery<UserDto[], ApiServiceError>({
     queryKey: 'users',
     queryFn: () => apiService.get('/user/all'),
   })
@@ -32,7 +32,7 @@ export const SearchUsers = () => {
       </div>
       {data && <UserList users={data} />}
       {isLoading && <Loader />}
-      {error && <span>{error}</span>}
+      {error && <span className="text-destructive">{error.message}</span>}
     </div>
   )
 }

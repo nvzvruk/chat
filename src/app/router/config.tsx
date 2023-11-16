@@ -1,6 +1,7 @@
 import { ReactNode } from 'react'
 import { ChatPage } from '@/pages/chat'
 import { LoginPage } from '@/pages/login'
+import { SignUpPage } from '@/pages/signup'
 import { RoutePath } from '@/shared/types'
 import { HomePage } from '@/pages/home'
 
@@ -21,7 +22,7 @@ export const routes: RouteConfig[] = [
   },
   {
     path: '/signup',
-    element: <LoginPage />,
+    element: <SignUpPage />,
   },
   {
     path: '/chat',

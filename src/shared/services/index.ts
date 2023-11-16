@@ -1,2 +1,2 @@
 export { localStorageService } from './localStorageService'
-export { apiService } from './apiService'
+export { apiService, type ApiServiceError } from './apiService'
