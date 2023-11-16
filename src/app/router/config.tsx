@@ -1,7 +1,7 @@
 import { ReactNode } from 'react'
 import { ChatPage } from '@/pages/chat'
 import { LoginPage } from '@/pages/login'
-import { RoutePath } from '@/shared/config'
+import { RoutePath } from '@/shared/types'
 import { HomePage } from '@/pages/home'
 
 interface RouteConfig {

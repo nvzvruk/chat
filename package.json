@@ -7,7 +7,7 @@
     "dev": "webpack serve",
     "build:dev": "webpack --mode=development",
     "build:prod": "webpack --mode=production --node-env=production",
-    "lint": "eslint . --fix"
+    "lint": "eslint ./src --fix"
   },
   "repository": {
     "type": "git",
@@ -64,6 +64,7 @@
     "@radix-ui/react-dropdown-menu": "^2.0.6",
     "@radix-ui/react-slot": "^1.0.2",
     "@radix-ui/react-switch": "^1.0.3",
+    "@radix-ui/react-tooltip": "^1.0.7",
     "axios": "^1.6.1",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.0.0",

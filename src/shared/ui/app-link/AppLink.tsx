@@ -1,6 +1,6 @@
 import React, { ReactElement } from 'react'
 import { Link as RouterLink } from 'react-router-dom'
-import { RoutePath } from '@/shared/config'
+import { RoutePath } from '@/shared/types'
 
 interface AppLinkProps {
   label: string

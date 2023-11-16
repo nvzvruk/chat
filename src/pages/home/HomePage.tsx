@@ -1,5 +1,7 @@
+import { PageLayout } from '@/widgets/PageLayout'
+
 export const HomePage = () => {
-  return <div>Home page</div>
+  return <PageLayout>Home Page</PageLayout>
 }
 
 export default HomePage

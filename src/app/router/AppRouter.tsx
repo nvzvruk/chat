@@ -27,7 +27,7 @@ const appRouter = createBrowserRouter(
         element
       )
 
-      return <Route path={path} element={_element} />
+      return <Route path={path} element={_element} key={path} />
     })
   )
 )

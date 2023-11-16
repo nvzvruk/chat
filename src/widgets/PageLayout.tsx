@@ -3,7 +3,7 @@ import { Sidebar } from '@/widgets/Sidebar'
 import { Header } from '@/widgets/Header'
 
 interface PageLayoutProps {
-  sidebarContent: ReactNode
+  sidebarContent?: ReactNode
   children: ReactNode
 }
 

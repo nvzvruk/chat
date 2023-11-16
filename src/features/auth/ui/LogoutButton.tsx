@@ -1,8 +1,13 @@
-import { type FC } from 'react'
+import { ArrowLeftOnRectangleIcon } from '@heroicons/react/24/solid'
 import { Button } from '@/shared/ui/button'
+import { useLogout } from '../hooks/useLogout'
 
-interface LogoutButtonProps {}
+export const LogoutButton = () => {
+  const logout = useLogout()
 
-export const LogoutButton: FC<LogoutButtonProps> = () => {
-  return <Button className="">LogoutButton</Button>
+  return (
+    <Button className="rounded-none" variant="ghost" onClick={logout}>
+      <ArrowLeftOnRectangleIcon className="w-4 h-4" />
+    </Button>
+  )
 }

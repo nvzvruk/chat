@@ -1,4 +1,4 @@
-import { MoonIcon, SunIcon } from '@heroicons/react/20/solid'
+import { MoonIcon, SunIcon } from '@heroicons/react/24/solid'
 import { Root, Thumb } from '@radix-ui/react-switch'
 import { useTheme } from '@/features/theme'
 
