@@ -1,23 +1,28 @@
-import React, { ReactElement } from 'react'
-import { Link as RouterLink } from 'react-router-dom'
+import React, { ReactNode } from 'react'
+import { Link } from 'react-router-dom'
 import { RoutePath } from '@/shared/types'
+import { cn } from '@/shared/helpers'
 
 interface AppLinkProps {
-  label: string
-  icon: ReactElement
   path: RoutePath
+  children: ReactNode
+  className?: string
 }
 
-export const AppLink: React.FC<AppLinkProps> = ({ icon, label, path }) => {
+export const AppLink: React.FC<AppLinkProps> = ({
+  children,
+  path,
+  className,
+}) => {
   return (
-    <RouterLink
+    <Link
       to={path}
-      className="text-blue-500 hover:underline hover:text-blue-700"
+      className={cn(
+        'text-blue-500 hover:underline hover:text-blue-700',
+        className
+      )}
     >
-      <div className="flex items-center gap-2">
-        {icon}
-        <span>{label}</span>
-      </div>
-    </RouterLink>
+      {children}
+    </Link>
   )
 }

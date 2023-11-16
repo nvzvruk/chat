@@ -1,5 +1,6 @@
 import { type FC } from 'react'
 import { useQuery } from 'react-query'
+import { ChatBubbleBottomCenterIcon } from '@heroicons/react/24/solid'
 import { type IMessageDTO, Message } from '@/entities/message'
 import { Loader } from '@/shared/ui/loader'
 import { ScrollContainer } from '@/shared/ui/scroll-container'
@@ -29,7 +30,10 @@ export const MessageHistory: FC<MessageHistoryProps> = () => {
         <div className="flex flex-col gap-2">{data.map(renderMessage)}</div>
       </ScrollContainer>
     ) : (
-      <div>No messages yet</div>
+      <div className="h-full flex flex-col items-center justify-center gap-4 text-foreground">
+        <ChatBubbleBottomCenterIcon className="w-10" />
+        <p className="text-xl">No messages yet</p>
+      </div>
     )
   return <div>32</div>
 }
