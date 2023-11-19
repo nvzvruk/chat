@@ -5,7 +5,7 @@ const tokenKey = 'access_token'
 interface UseAccessToken {
   token: string | null
   setToken: (token: string) => void
-  removeToken: () => void
+  resetToken: () => void
 }
 
 export const useAccessToken = (): UseAccessToken => {
@@ -14,6 +14,6 @@ export const useAccessToken = (): UseAccessToken => {
   return {
     token,
     setToken: (token: string) => localStorageService.setItem(tokenKey, token),
-    removeToken: () => localStorageService.removeItem(tokenKey),
+    resetToken: () => localStorageService.removeItem(tokenKey),
   }
 }

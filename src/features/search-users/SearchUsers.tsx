@@ -1,4 +1,4 @@
-import { ChangeEvent, useState } from 'react'
+import { ChangeEvent, useState, memo } from 'react'
 import { useQuery } from 'react-query'
 import { MagnifyingGlassIcon } from '@heroicons/react/24/solid'
 import { UserDto, UserList } from '@/entities/user'
@@ -7,7 +7,7 @@ import { Input } from '@/shared/ui/input'
 import { useDebounce } from '@/shared/hooks'
 import { apiService, ApiServiceError } from '@/shared/services'
 
-export const SearchUsers = () => {
+export const SearchUsers = memo(() => {
   const [query, setQuery] = useState('')
 
   const { data, error, isLoading } = useQuery<UserDto[], ApiServiceError>({
@@ -35,4 +35,4 @@ export const SearchUsers = () => {
       {error && <span className="text-destructive">{error.message}</span>}
     </div>
   )
-}
+})

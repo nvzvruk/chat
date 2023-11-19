@@ -2,7 +2,7 @@ import { type FC } from 'react'
 import { Input } from '@/shared/ui/input'
 import { Button } from '@/shared/ui/button'
 import { Card } from '@/shared/ui/card'
-import { useSignUp } from '../hooks/useSignUp'
+import { useSignUpForm } from '../hooks/useSignUpForm'
 
 interface SignUpFormProps {}
 
@@ -15,7 +15,7 @@ export const SignUpForm: FC<SignUpFormProps> = () => {
     handleEmailChange,
     handlePasswordChange,
     handleSubmit,
-  } = useSignUp()
+  } = useSignUpForm()
 
   return (
     <Card className="flex flex-col gap-4 m-auto max-w-md min-w-[320px] p-4">

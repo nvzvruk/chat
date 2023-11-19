@@ -5,8 +5,12 @@ import { useLogout } from '../hooks/useLogout'
 export const LogoutButton = () => {
   const logout = useLogout()
 
+  const onButtonClick = () => {
+    logout()
+  }
+
   return (
-    <Button className="rounded-none" variant="ghost" onClick={logout}>
+    <Button className="rounded-none" variant="ghost" onClick={onButtonClick}>
       <ArrowLeftOnRectangleIcon className="w-4 h-4" />
     </Button>
   )

@@ -11,7 +11,7 @@ interface LoginPayload {
   password: string
 }
 
-export const useLogin = () => {
+export const useLoginForm = () => {
   const navigate = useNavigate()
   const { setUser } = useAuthStore()
   const [username, setUsername] = useState('')

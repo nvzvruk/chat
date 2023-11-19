@@ -1,15 +1,23 @@
 import { useNavigate } from 'react-router-dom'
+import { useMutation } from 'react-query'
+import { apiService } from '@/shared/services'
 import { useAuthStore } from '../store'
 import { useAccessToken } from '../hooks/useAccessToken'
 
 export const useLogout = () => {
   const { resetUser } = useAuthStore()
-  const { removeToken } = useAccessToken()
+  const { resetToken } = useAccessToken()
   const navigate = useNavigate()
 
-  return () => {
-    removeToken()
-    resetUser()
-    navigate('/login')
-  }
+  const { mutate } = useMutation({
+    mutationKey: 'logout',
+    mutationFn: () => apiService.post('/auth/logout', {}),
+    onSuccess: () => {
+      resetToken()
+      resetUser()
+      navigate('/login')
+    },
+  })
+
+  return mutate
 }

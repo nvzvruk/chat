@@ -1,5 +1,6 @@
 import axios, { AxiosError } from 'axios'
 import { localStorageService } from '@/shared/services'
+import { AuthError } from '@/shared/config/errorNames'
 
 const API_BASE_URL = 'http://localhost:3002'
 
@@ -20,6 +21,24 @@ axiosInstance.interceptors.request.use((config) => {
 
   return config
 })
+
+axiosInstance.interceptors.response.use(
+  (response) => response,
+  async (error) => {
+    const errorName = error.response.data.name
+
+    if (errorName === AuthError.AccessTokenExpired) {
+      const { data: newToken } = await axiosInstance.post('auth/refresh')
+      localStorageService.setItem('access_token', newToken)
+    }
+
+    if (errorName === AuthError.RefreshTokenExpired) {
+      localStorageService.removeItem('access_token')
+    }
+
+    return Promise.reject(error)
+  }
+)
 
 export interface ApiServiceError extends AxiosError {}
 

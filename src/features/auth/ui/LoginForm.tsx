@@ -1,7 +1,7 @@
 import { Card } from '@/shared/ui/card'
 import { Input } from '@/shared/ui/input'
 import { Button } from '@/shared/ui/button'
-import { useLogin } from '../hooks/useLogin'
+import { useLoginForm } from '../hooks/useLoginForm'
 
 export const LoginForm = () => {
   const {
@@ -10,7 +10,7 @@ export const LoginForm = () => {
     handleNameChange,
     handlePasswordChange,
     handleSubmit,
-  } = useLogin()
+  } = useLoginForm()
 
   return (
     <Card className="flex flex-col gap-4 m-auto max-w-md min-w-[320px] p-4">

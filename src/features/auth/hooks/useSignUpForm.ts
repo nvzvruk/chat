@@ -12,7 +12,7 @@ interface SignUpPayload {
   password: string
 }
 
-export const useSignUp = () => {
+export const useSignUpForm = () => {
   const navigate = useNavigate()
   const { setUser } = useAuthStore()
   const [username, setUsername] = useState('')
