@@ -1,2 +1,2 @@
-export { type IMessageDTO } from './type'
-export { Message } from './ui/Message'
+export { type MessageDto } from './type'
+export { MessageCard } from './ui/MessageCard'

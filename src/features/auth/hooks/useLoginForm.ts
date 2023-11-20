@@ -3,8 +3,8 @@ import { useNavigate } from 'react-router-dom'
 import { useMutation } from 'react-query'
 import { UserDto } from '@/entities/user'
 import { apiService } from '@/shared/services'
-import { useAuthStore } from '../store'
 import { useAccessToken } from './useAccessToken'
+import { useCurrentUser } from '@/features/auth'
 
 interface LoginPayload {
   username: string
@@ -13,10 +13,10 @@ interface LoginPayload {
 
 export const useLoginForm = () => {
   const navigate = useNavigate()
-  const { setUser } = useAuthStore()
+  const { setUser } = useCurrentUser()
+  const { setToken } = useAccessToken()
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
-  const { setToken } = useAccessToken()
 
   const { mutate } = useMutation({
     mutationKey: 'login',

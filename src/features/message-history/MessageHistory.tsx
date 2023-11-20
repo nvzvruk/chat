@@ -1,33 +1,34 @@
-import { type FC } from 'react'
-import { useQuery } from 'react-query'
+import { type FC, useEffect } from 'react'
 import { ChatBubbleBottomCenterIcon } from '@heroicons/react/24/outline'
-import { type IMessageDTO, Message } from '@/entities/message'
-import { Loader } from '@/shared/ui/loader'
+import { type MessageDto, MessageCard } from '@/entities/message'
 import { ScrollContainer } from '@/shared/ui/scroll-container'
-import { apiService, ApiServiceError } from '@/shared/services'
+import { useChat } from '@/shared/context'
+import { useCurrentUser } from '@/features/auth'
 
 interface MessageHistoryProps {}
 // TODO: lazy load by page, virtualization?
 export const MessageHistory: FC<MessageHistoryProps> = () => {
-  const { data, error, isLoading } = useQuery<IMessageDTO[], ApiServiceError>({
-    queryKey: 'messages',
-    queryFn: () => apiService.get('/message/all'),
-  })
+  const { messages, requestMessages } = useChat()
+  const { user } = useCurrentUser()
 
-  const renderMessage = (message: IMessageDTO) => {
-    return <Message key={message.id} message={message} isUserMessage={false} />
+  const renderMessage = (message: MessageDto) => {
+    return (
+      <MessageCard
+        key={message.id}
+        message={message}
+        isUserMessage={message.sender.id === user?.id}
+      />
+    )
   }
 
-  if (isLoading) return <Loader />
+  useEffect(() => {
+    requestMessages()
+  }, [])
 
-  if (error) {
-    return <h3 className="text-destructive">{error.message}</h3>
-  }
-
-  if (data)
-    return data.length > 0 ? (
+  if (messages)
+    return messages.length > 0 ? (
       <ScrollContainer>
-        <div className="flex flex-col gap-2">{data.map(renderMessage)}</div>
+        <div className="flex flex-col gap-2">{messages.map(renderMessage)}</div>
       </ScrollContainer>
     ) : (
       <div className="h-full flex flex-col items-center justify-center gap-4 text-foreground">

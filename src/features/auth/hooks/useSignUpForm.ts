@@ -1,9 +1,9 @@
 import { ChangeEvent, FormEvent, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useMutation } from 'react-query'
+import { useCurrentUser } from '@/features/auth'
 import { UserDto } from '@/entities/user'
 import { apiService } from '@/shared/services'
-import { useAuthStore } from '../store'
 import { useAccessToken } from './useAccessToken'
 
 interface SignUpPayload {
@@ -14,7 +14,7 @@ interface SignUpPayload {
 
 export const useSignUpForm = () => {
   const navigate = useNavigate()
-  const { setUser } = useAuthStore()
+  const { setUser } = useCurrentUser()
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
   const [email, setEmail] = useState('')

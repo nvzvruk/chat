@@ -4,12 +4,10 @@ interface MessageSender {
   avatarSrc?: string
 }
 
-export interface IMessage<T = string> {
+export interface MessageDto {
   id: string
   text: string
   createdAt: string
   updatedAt: string
-  sender: T
+  sender: MessageSender
 }
-
-export type IMessageDTO = IMessage<MessageSender>

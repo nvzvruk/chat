@@ -6,14 +6,14 @@ import {
   Navigate,
 } from 'react-router-dom'
 import { ReactNode } from 'react'
-import { useAccessToken } from '@/features/auth'
+import { useCurrentUser } from '@/features/auth'
 import { Loader } from '@/shared/ui/loader'
 import { routes } from './config'
 
 export const PrivateRoute = ({ element }: { element: ReactNode }) => {
-  const { token } = useAccessToken()
+  const { isLoggedIn } = useCurrentUser()
 
-  if (token) return element
+  if (isLoggedIn) return element
 
   return <Navigate to="/login" />
 }

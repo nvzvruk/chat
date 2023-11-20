@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom'
 import { HomeIcon, ChatBubbleLeftRightIcon } from '@heroicons/react/24/solid'
-import { useAccessToken } from '@/features/auth'
+import { useCurrentUser } from '@/features/auth'
 import { HeroIcon, RoutePath } from '@/shared/types'
 import {
   Tooltip,
@@ -44,8 +44,8 @@ const NavItem = ({ path, icon: Icon, label }: SidebarMenuItem) => {
 }
 
 export const SidebarNav = () => {
-  const { token } = useAccessToken()
-  const menuItems = getMenuItems(Boolean(token))
+  const { isLoggedIn } = useCurrentUser()
+  const menuItems = getMenuItems(isLoggedIn)
 
   return (
     <nav>

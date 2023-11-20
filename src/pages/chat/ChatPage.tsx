@@ -1,11 +1,10 @@
 import { SendMessage } from '@/features/send-message'
 import { MessageHistory } from '@/features/message-history'
-import { SearchUsers } from '@/features/search-users'
-import { PageLayout } from '@/widgets/PageLayout'
+import { PageLayout } from '@/widgets/PageLayoutNew'
 
 export const ChatPage = () => {
   return (
-    <PageLayout sidebarContent={<SearchUsers />}>
+    <PageLayout>
       <div className="flex flex-col gap-4 grow">
         <MessageHistory />
         <footer>
