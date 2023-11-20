@@ -1,12 +1,10 @@
 import { ReactNode, useEffect, useState } from 'react'
 import { useCurrentUser } from '@/features/auth'
-import io from 'socket.io-client'
 import { MessageDto } from '@/entities/message'
-import { ChatContext } from '@/shared/context'
+import { ConnectionContext } from '@/shared/context'
+import { socket } from './socket'
 
-export const socket = io('http://localhost:3002')
-
-export const ChatProvider = ({ children }: { children: ReactNode }) => {
+export const SocketClientProvider = ({ children }: { children: ReactNode }) => {
   const [messages, setMessages] = useState<MessageDto[]>([])
   const { user } = useCurrentUser()
 
@@ -30,12 +28,14 @@ export const ChatProvider = ({ children }: { children: ReactNode }) => {
   }
 
   useEffect(() => {
+    socket.connect()
     socket.on('receive_message', handleReceiveMessage)
     socket.on('receive_all_messages', handleReceiveAllMessages)
 
     return () => {
       socket.off('receive_message', handleReceiveMessage)
       socket.off('receive_all_messages', handleReceiveAllMessages)
+      console.log('disconnect')
       socket.disconnect()
     }
   }, [])
@@ -47,6 +47,8 @@ export const ChatProvider = ({ children }: { children: ReactNode }) => {
   }
 
   return (
-    <ChatContext.Provider value={contextValue}>{children}</ChatContext.Provider>
+    <ConnectionContext.Provider value={contextValue}>
+      {children}
+    </ConnectionContext.Provider>
   )
 }

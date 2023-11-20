@@ -7,14 +7,15 @@ export interface ContextValue {
   requestMessages: () => void
 }
 
-export const ChatContext = createContext<ContextValue>({
+export const ConnectionContext = createContext<ContextValue>({
   messages: [],
   sendMessage: () => {},
   requestMessages: () => {},
 })
 
-export const useChat = () => {
-  const { messages, sendMessage, requestMessages } = useContext(ChatContext)
+export const useConnection = () => {
+  const { messages, sendMessage, requestMessages } =
+    useContext(ConnectionContext)
 
   return { messages, sendMessage, requestMessages }
 }

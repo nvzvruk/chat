@@ -2,12 +2,12 @@ import { type FC, memo, useState, FormEvent, ChangeEvent } from 'react'
 import { Button } from '@/shared/ui/button'
 import { Card } from '@/shared/ui/card'
 import { Input } from '@/shared/ui/input'
-import { useChat } from '@/shared/context'
+import { useConnection } from '@/shared/context'
 
 interface SendMessageProps {}
 
 export const SendMessage: FC<SendMessageProps> = memo(() => {
-  const { sendMessage } = useChat()
+  const { sendMessage } = useConnection()
   const [text, setText] = useState('')
 
   function handleInputChange(e: ChangeEvent<HTMLInputElement>) {

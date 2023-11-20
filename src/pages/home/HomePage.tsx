@@ -1,6 +1,6 @@
 import { AppLink } from '@/shared/ui/app-link'
 import { useCurrentUser } from '@/features/auth'
-import { PageLayout } from '@/widgets/PageLayoutNew'
+import { PageLayout } from '@/widgets/PageLayout'
 
 export const HomePage = () => {
   const { isLoggedIn } = useCurrentUser()

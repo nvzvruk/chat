@@ -2,13 +2,14 @@ import { type FC, useEffect } from 'react'
 import { ChatBubbleBottomCenterIcon } from '@heroicons/react/24/outline'
 import { type MessageDto, MessageCard } from '@/entities/message'
 import { ScrollContainer } from '@/shared/ui/scroll-container'
-import { useChat } from '@/shared/context'
+import { useConnection } from '@/shared/context'
 import { useCurrentUser } from '@/features/auth'
 
 interface MessageHistoryProps {}
 // TODO: lazy load by page, virtualization?
 export const MessageHistory: FC<MessageHistoryProps> = () => {
-  const { messages, requestMessages } = useChat()
+  // TODO get messages using REST
+  const { messages, requestMessages } = useConnection()
   const { user } = useCurrentUser()
 
   const renderMessage = (message: MessageDto) => {

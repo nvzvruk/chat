@@ -1,6 +1,6 @@
 import { SendMessage } from '@/features/send-message'
 import { MessageHistory } from '@/features/message-history'
-import { PageLayout } from '@/widgets/PageLayoutNew'
+import { PageLayout } from '@/widgets/PageLayout'
 
 export const ChatPage = () => {
   return (

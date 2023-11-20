@@ -1,1 +1,1 @@
-export { ChatContext, useChat } from './ChatContext'
+export { ConnectionContext, useConnection } from './ConnectionContext'
