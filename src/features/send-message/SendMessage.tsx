@@ -2,13 +2,15 @@ import { type FC, memo, useState, FormEvent, ChangeEvent } from 'react'
 import { Button } from '@/shared/ui/button'
 import { Card } from '@/shared/ui/card'
 import { Input } from '@/shared/ui/input'
-import { useConnection } from '@/shared/context'
+import { useSocketConnection } from '@/shared/context'
+import { useCurrentUser } from '@/features/auth'
 
 interface SendMessageProps {}
 
 export const SendMessage: FC<SendMessageProps> = memo(() => {
-  const { sendMessage } = useConnection()
   const [text, setText] = useState('')
+  const { emitEvent } = useSocketConnection()
+  const { currentUser } = useCurrentUser()
 
   function handleInputChange(e: ChangeEvent<HTMLInputElement>) {
     setText(e.target.value)
@@ -17,8 +19,11 @@ export const SendMessage: FC<SendMessageProps> = memo(() => {
   function handleFormSubmit(e: FormEvent) {
     e.preventDefault()
 
-    if (text.length > 0) {
-      sendMessage(text)
+    if (text.trim().length > 0) {
+      emitEvent('send_message', {
+        text,
+        userId: currentUser?.id,
+      })
       setText('')
     }
   }

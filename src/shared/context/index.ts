@@ -1,1 +1,6 @@
-export { ConnectionContext, useConnection } from './ConnectionContext'
+export {
+  SocketConnectionContext,
+  useSocketConnection,
+  type EventListener,
+  type EventEmitter,
+} from './SocketConnectionContext'

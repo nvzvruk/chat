@@ -13,7 +13,7 @@ interface LoginPayload {
 
 export const useLoginForm = () => {
   const navigate = useNavigate()
-  const { setUser } = useCurrentUser()
+  const { setCurrentUser } = useCurrentUser()
   const { setToken } = useAccessToken()
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
@@ -27,7 +27,7 @@ export const useLoginForm = () => {
       }),
     onSuccess: ({ accessToken, ...userData }) => {
       setToken(accessToken)
-      setUser(userData)
+      setCurrentUser(userData)
       navigate('/chat')
     },
   })

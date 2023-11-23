@@ -1,1 +1,1 @@
-export { MessageHistory } from './MessageHistory'
+export { MessageHistory } from './ui/MessageHistory'

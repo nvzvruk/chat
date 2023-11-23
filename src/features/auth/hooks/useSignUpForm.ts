@@ -14,7 +14,7 @@ interface SignUpPayload {
 
 export const useSignUpForm = () => {
   const navigate = useNavigate()
-  const { setUser } = useCurrentUser()
+  const { setCurrentUser } = useCurrentUser()
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
   const [email, setEmail] = useState('')
@@ -30,7 +30,7 @@ export const useSignUpForm = () => {
       }),
     onSuccess: ({ accessToken, ...userData }) => {
       setToken(accessToken)
-      setUser(userData)
+      setCurrentUser(userData)
       navigate('/chat')
     },
   })

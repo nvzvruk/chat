@@ -1,7 +1,6 @@
 interface MessageSender {
   id: string
   name: string
-  avatarSrc?: string
 }
 
 export interface MessageDto {

@@ -5,7 +5,7 @@ import { apiService } from '@/shared/services'
 import { useAccessToken } from '../hooks/useAccessToken'
 
 export const useLogout = () => {
-  const { resetUser } = useCurrentUser()
+  const { resetCurrentUser } = useCurrentUser()
   const { resetToken } = useAccessToken()
   const navigate = useNavigate()
 
@@ -14,7 +14,7 @@ export const useLogout = () => {
     mutationFn: () => apiService.post('/auth/logout', {}),
     onSuccess: () => {
       resetToken()
-      resetUser()
+      resetCurrentUser()
       navigate('/login')
     },
   })
