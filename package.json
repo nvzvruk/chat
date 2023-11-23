@@ -11,7 +11,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/nvzvruk/chat.git"
+    "url": "git+https://github.com/nvzvruk/chat_client.git"
   },
   "keywords": [
     "chat",
@@ -20,9 +20,9 @@
   "author": "nvzvruk",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/nvzvruk/chat/issues"
+    "url": "https://github.com/nvzvruk/chat_client/issues"
   },
-  "homepage": "https://github.com/nvzvruk/chat#readme",
+  "homepage": "https://github.com/nvzvruk/chat_client#readme",
   "devDependencies": {
     "@babel/core": "^7.23.2",
     "@babel/preset-env": "^7.23.2",
