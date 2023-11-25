@@ -3,8 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import { useMutation } from 'react-query'
 import { UserDto } from '@/entities/user'
 import { apiService } from '@/shared/services'
-import { useAccessToken } from './useAccessToken'
-import { useCurrentUser } from '@/features/auth'
+import { useAuthenticatedUser } from './useAuthenticatedUser'
 
 interface LoginPayload {
   username: string
@@ -13,8 +12,7 @@ interface LoginPayload {
 
 export const useLoginForm = () => {
   const navigate = useNavigate()
-  const { setCurrentUser } = useCurrentUser()
-  const { setToken } = useAccessToken()
+  const { setAuthUserData } = useAuthenticatedUser()
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
 
@@ -26,8 +24,7 @@ export const useLoginForm = () => {
         password,
       }),
     onSuccess: ({ accessToken, ...userData }) => {
-      setToken(accessToken)
-      setCurrentUser(userData)
+      setAuthUserData(userData, accessToken)
       navigate('/chat')
     },
   })

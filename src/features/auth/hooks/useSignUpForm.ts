@@ -1,10 +1,9 @@
 import { ChangeEvent, FormEvent, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useMutation } from 'react-query'
-import { useCurrentUser } from '@/features/auth'
 import { UserDto } from '@/entities/user'
 import { apiService } from '@/shared/services'
-import { useAccessToken } from './useAccessToken'
+import { useAuthenticatedUser } from './useAuthenticatedUser'
 
 interface SignUpPayload {
   name: string
@@ -14,11 +13,10 @@ interface SignUpPayload {
 
 export const useSignUpForm = () => {
   const navigate = useNavigate()
-  const { setCurrentUser } = useCurrentUser()
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
   const [email, setEmail] = useState('')
-  const { setToken } = useAccessToken()
+  const { setAuthUserData } = useAuthenticatedUser()
 
   const { mutate } = useMutation({
     mutationKey: 'signup',
@@ -29,8 +27,7 @@ export const useSignUpForm = () => {
         password,
       }),
     onSuccess: ({ accessToken, ...userData }) => {
-      setToken(accessToken)
-      setCurrentUser(userData)
+      setAuthUserData(userData, accessToken)
       navigate('/chat')
     },
   })

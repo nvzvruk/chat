@@ -6,7 +6,7 @@ import { ErrorPlaceholder } from '@/shared/ui/error'
 import { apiService, ApiServiceError } from '@/shared/services'
 import { Virtuoso, VirtuosoHandle } from 'react-virtuoso'
 import { useSocketConnection } from '@/shared/context'
-import { useCurrentUser } from '@/features/auth'
+import { useAuthenticatedUser } from '@/features/auth'
 import { EmptyMassagesPlaceholder } from '@/features/message-history/ui/EmptyMassagesPlaceholder'
 
 interface GetMessageResponse {
@@ -21,8 +21,7 @@ export function MessageHistory() {
   const [hasUnread, setHasUnread] = useState(false)
   const [pageToLoad, setPageToLoad] = useState(1)
   const virtuosoRef = useRef<VirtuosoHandle>(null)
-  const { currentUser } = useCurrentUser()
-  const [scrollToNew, setScrollToNew] = useState(false)
+  const { user } = useAuthenticatedUser()
   const { addEventListener, removeEventListener } = useSocketConnection()
 
   const [firstItemIndex, setFirstItemIndex] = useState(10000)
@@ -50,18 +49,17 @@ export function MessageHistory() {
       <MessageCard
         key={`message-${message.id}`}
         message={message}
-        isUserMessage={message.sender.id === currentUser?.id}
+        isUserMessage={message.sender.id === user?.id}
       />
     </div>
   )
 
   const startReached = () => {
-    setScrollToNew(false)
     setPageToLoad((prevState) => prevState + 1)
   }
 
   const handleReceiveMessage = (message: MessageDto) => {
-    if (message.sender.id === currentUser?.id) {
+    if (message.sender.id === user?.id) {
       virtuosoRef.current?.scrollToIndex({
         index: 'LAST',
         behavior: 'smooth',
@@ -94,8 +92,9 @@ export function MessageHistory() {
 
   if (messages) {
     return (
-      <div className="w-full h-full relative">
+      <div className="w-full h-full flex flex-col justify-end relative">
         <Virtuoso
+          alignToBottom
           endReached={endReached}
           ref={virtuosoRef}
           followOutput={followOutput}

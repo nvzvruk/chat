@@ -1,3 +1,4 @@
+import { ReactNode } from 'react'
 import {
   RouterProvider,
   createBrowserRouter,
@@ -5,13 +6,12 @@ import {
   Route,
   Navigate,
 } from 'react-router-dom'
-import { ReactNode } from 'react'
-import { useCurrentUser } from '@/features/auth'
+import { useAuthenticatedUser } from '@/features/auth'
 import { Loader } from '@/shared/ui/loader'
 import { routes } from './config'
 
 export const PrivateRoute = ({ element }: { element: ReactNode }) => {
-  const { isLoggedIn } = useCurrentUser()
+  const { isLoggedIn } = useAuthenticatedUser()
 
   if (isLoggedIn) return element
 

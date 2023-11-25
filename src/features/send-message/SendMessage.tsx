@@ -3,14 +3,14 @@ import { Button } from '@/shared/ui/button'
 import { Card } from '@/shared/ui/card'
 import { Input } from '@/shared/ui/input'
 import { useSocketConnection } from '@/shared/context'
-import { useCurrentUser } from '@/features/auth'
+import { useAuthenticatedUser } from '@/features/auth'
 
 interface SendMessageProps {}
 
 export const SendMessage: FC<SendMessageProps> = memo(() => {
   const [text, setText] = useState('')
   const { emitEvent } = useSocketConnection()
-  const { currentUser } = useCurrentUser()
+  const { user } = useAuthenticatedUser()
 
   function handleInputChange(e: ChangeEvent<HTMLInputElement>) {
     setText(e.target.value)
@@ -22,7 +22,7 @@ export const SendMessage: FC<SendMessageProps> = memo(() => {
     if (text.trim().length > 0) {
       emitEvent('send_message', {
         text,
-        userId: currentUser?.id,
+        userId: user?.id,
       })
       setText('')
     }

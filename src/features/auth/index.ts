@@ -1,5 +1,4 @@
 export { SignUpForm } from './ui/SignUpForm'
 export { LoginForm } from './ui/LoginForm'
 export { LogoutButton } from './ui/LogoutButton'
-export { useAccessToken } from './hooks/useAccessToken'
-export { useCurrentUser } from './hooks/useCurrentUser'
+export { useAuthenticatedUser } from './hooks/useAuthenticatedUser'

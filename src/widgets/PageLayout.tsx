@@ -1,7 +1,7 @@
 import { type FC, ReactNode } from 'react'
 import { Sidebar } from '@/widgets/Sidebar'
 import { Header } from '@/widgets/Header'
-import { useCurrentUser } from '@/features/auth'
+import { useAuthenticatedUser } from '@/features/auth'
 
 interface PageLayoutProps {
   sidebarContent?: ReactNode
@@ -9,7 +9,7 @@ interface PageLayoutProps {
 }
 
 export const PageLayout: FC<PageLayoutProps> = ({ children }) => {
-  const { isLoggedIn } = useCurrentUser()
+  const { isLoggedIn } = useAuthenticatedUser()
 
   if (isLoggedIn) {
     return (
