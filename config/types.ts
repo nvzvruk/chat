@@ -1,4 +1,4 @@
-type Mode = 'development' | 'production';
+type Mode = 'development' | 'production'
 
 export interface BuildOptions {
   mode: Mode
