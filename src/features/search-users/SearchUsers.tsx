@@ -1,23 +1,25 @@
-import { ChangeEvent, useState, memo } from 'react'
+import { ChangeEvent, useCallback, useState } from 'react'
 import { useQuery } from 'react-query'
 import { MagnifyingGlassIcon } from '@heroicons/react/24/solid'
 import { UserDto, UserList } from '@/entities/user'
 import { Loader } from '@/shared/ui/loader'
 import { Input } from '@/shared/ui/input'
-import { useDebounce } from '@/shared/hooks'
+import { useDebouncedValue } from '@/shared/hooks'
 import { apiService, ApiServiceError } from '@/shared/services'
 
-export const SearchUsers = memo(() => {
+export const SearchUsers = () => {
   const [query, setQuery] = useState('')
+  const debouncedQuery = useDebouncedValue(query, 500)
 
   const { data, error, isLoading } = useQuery<UserDto[], ApiServiceError>({
-    queryKey: 'users',
-    queryFn: () => apiService.get('/user/all'),
+    queryKey: ['search', debouncedQuery],
+    queryFn: () => apiService.get(`/user/search?search=${debouncedQuery}`),
   })
 
-  const handleSearchChange = async (e: ChangeEvent<HTMLInputElement>) => {
+  const handleSearchChange = useCallback(
+    (e: ChangeEvent<HTMLInputElement>) => {
     setQuery(e.target.value)
-  }
+  }, [])
 
   return (
     <div className="flex flex-col gap-4 h-full">
@@ -26,7 +28,7 @@ export const SearchUsers = memo(() => {
           <MagnifyingGlassIcon className="absolute right-3 top-[50%] -translate-y-[50%] w-4 fill-foreground pointer-events-none" />
           <Input
             placeholder="Search users..."
-            onChange={useDebounce(handleSearchChange, 500)}
+            onChange={handleSearchChange}
           />
         </div>
       </div>
@@ -35,4 +37,4 @@ export const SearchUsers = memo(() => {
       {error && <span className="text-destructive">{error.message}</span>}
     </div>
   )
-})
+}

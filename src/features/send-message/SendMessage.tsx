@@ -1,4 +1,4 @@
-import { type FC, memo, useState, FormEvent, ChangeEvent } from 'react'
+import { type FC, useState, FormEvent, ChangeEvent } from 'react'
 import { Button } from '@/shared/ui/button'
 import { Card } from '@/shared/ui/card'
 import { Input } from '@/shared/ui/input'
@@ -7,7 +7,7 @@ import { useAuthenticatedUser } from '@/features/auth'
 
 interface SendMessageProps {}
 
-export const SendMessage: FC<SendMessageProps> = memo(() => {
+export const SendMessage: FC<SendMessageProps> = () => {
   const [text, setText] = useState('')
   const { emitEvent } = useSocketConnection()
   const { user } = useAuthenticatedUser()
@@ -44,4 +44,4 @@ export const SendMessage: FC<SendMessageProps> = memo(() => {
       </form>
     </Card>
   )
-})
+}

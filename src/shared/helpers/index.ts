@@ -5,7 +5,7 @@ export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs))
 }
 
-export function compose<T extends () => any>(...callbacks: T[]) {
+export function compose<T extends () => void>(...callbacks: T[]) {
   callbacks.forEach((cb) => {
     cb()
   })

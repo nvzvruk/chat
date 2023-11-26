@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { useQuery } from 'react-query'
 import { MessageCard, MessageDto } from '@/entities/message'
 import { Loader } from '@/shared/ui/loader'
@@ -43,16 +43,19 @@ export function MessageHistory() {
 
   if (error) return <ErrorPlaceholder message={error.message} />
 
-  // @ts-ignore
-  const renderMessage = (_, message: MessageDto) => (
-    <div className="py-2">
-      <MessageCard
-        key={`message-${message.id}`}
-        message={message}
-        isUserMessage={message.sender.id === user?.id}
-      />
-    </div>
-  )
+  const renderMessage = (...args: [index: number, message: MessageDto]) => {
+    const [, message] = args
+
+    return (
+      <div className="py-2">
+        <MessageCard
+          key={`message-${message.id}-index`}
+          message={message}
+          isUserMessage={message.sender.id === user?.id}
+        />
+      </div>
+    )
+  }
 
   const startReached = () => {
     setPageToLoad((prevState) => prevState + 1)

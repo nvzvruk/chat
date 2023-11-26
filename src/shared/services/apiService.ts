@@ -43,18 +43,18 @@ axiosInstance.interceptors.response.use(
 export interface ApiServiceError extends AxiosError {}
 
 export const apiService = {
-  get: async <T>(url: string, params?: any) => {
-    const { data } = await axiosInstance.get<T>(url, { params })
+  get: async <T, P extends object>(url: string, body?: P) => {
+    const { data } = await axiosInstance.get<T>(url, body)
     return data
   },
 
-  post: async <T, P>(url: string, data: P) => {
-    const response = await axiosInstance.post<T>(url, data)
+  post: async <T, P extends object>(url: string, body: P) => {
+    const response = await axiosInstance.post<T>(url, body)
     return response.data
   },
 
-  put: async <T>(url: string, data: any) => {
-    const response = await axiosInstance.put<T>(url, data)
+  put: async <T, P extends object>(url: string, body: P) => {
+    const response = await axiosInstance.put<T>(url, body)
     return response.data
   },
 

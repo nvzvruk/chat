@@ -1,10 +1,18 @@
-import { useRef, useCallback } from 'react'
+import { useRef, useCallback, useEffect , useState} from 'react'
 
-export const useDebounce = <T extends (...args: any[]) => void>(
+export const useDebouncedCallback = <T extends (...args: never[]) => void>(
   callback: T,
   ms: number
 ): ((...args: Parameters<T>) => void) => {
   const timerRef = useRef<number | null>(null)
+
+  useEffect(() => {
+    return () => {
+      if (timerRef.current) {
+        clearTimeout(timerRef.current);
+      }
+    };
+  }, []);
 
   return useCallback(
     (...args: Parameters<T>) => {
@@ -17,4 +25,18 @@ export const useDebounce = <T extends (...args: any[]) => void>(
     },
     [callback, ms]
   )
+}
+
+export function useDebouncedValue<T>(value: T, delay?: number): T {
+  const [debouncedValue, setDebouncedValue] = useState<T>(value)
+
+  useEffect(() => {
+    const timer = setTimeout(() => setDebouncedValue(value), delay || 500)
+
+    return () => {
+      clearTimeout(timer)
+    }
+  }, [value, delay])
+
+  return debouncedValue
 }
