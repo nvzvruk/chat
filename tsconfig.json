@@ -16,10 +16,5 @@
       "@/*": ["./src/*"]
     }
   },
-  "ts-node": {
-    "compilerOptions": {
-      "module": "CommonJS"
-    }
-  },
-  "include": ["./config/tests/setupTests.ts", "./src/**/*.ts", "./src/**/*.tsx"]
+  "include": ["./config/**/*.ts", "./src/**/*.ts", "./src/**/*.tsx"]
 }

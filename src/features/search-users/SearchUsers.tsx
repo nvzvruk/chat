@@ -16,8 +16,7 @@ export const SearchUsers = () => {
     queryFn: () => apiService.get(`/user/search?search=${debouncedQuery}`),
   })
 
-  const handleSearchChange = useCallback(
-    (e: ChangeEvent<HTMLInputElement>) => {
+  const handleSearchChange = useCallback((e: ChangeEvent<HTMLInputElement>) => {
     setQuery(e.target.value)
   }, [])
 
@@ -26,10 +25,7 @@ export const SearchUsers = () => {
       <div className="px-4">
         <div className="relative">
           <MagnifyingGlassIcon className="absolute right-3 top-[50%] -translate-y-[50%] w-4 fill-foreground pointer-events-none" />
-          <Input
-            placeholder="Search users..."
-            onChange={handleSearchChange}
-          />
+          <Input placeholder="Search users..." onChange={handleSearchChange} />
         </div>
       </div>
       {data && <UserList users={data} />}

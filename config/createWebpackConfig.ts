@@ -1,10 +1,9 @@
 import * as path from 'path'
 import { Configuration } from 'webpack'
 import 'webpack-dev-server'
-// @ts-ignore
 import HtmlWebpackPlugin from 'html-webpack-plugin'
-// @ts-ignore
 import MiniCssExtractPlugin from 'mini-css-extract-plugin'
+import ForkTsCheckerWebpackPlugin from 'fork-ts-checker-webpack-plugin'
 import { BundleAnalyzerPlugin } from 'webpack-bundle-analyzer'
 import { BuildOptions } from './types'
 
@@ -52,6 +51,15 @@ export function createWebpackConfig({
       }),
       new BundleAnalyzerPlugin({
         openAnalyzer: false,
+      }),
+      new ForkTsCheckerWebpackPlugin({
+        typescript: {
+          diagnosticOptions: {
+            semantic: true,
+            syntactic: true,
+          },
+          mode: 'write-references',
+        },
       }),
     ],
     devServer: {

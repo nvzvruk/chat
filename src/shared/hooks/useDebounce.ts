@@ -1,4 +1,4 @@
-import { useRef, useCallback, useEffect , useState} from 'react'
+import { useRef, useCallback, useEffect, useState } from 'react'
 
 export const useDebouncedCallback = <T extends (...args: never[]) => void>(
   callback: T,
@@ -9,10 +9,10 @@ export const useDebouncedCallback = <T extends (...args: never[]) => void>(
   useEffect(() => {
     return () => {
       if (timerRef.current) {
-        clearTimeout(timerRef.current);
+        clearTimeout(timerRef.current)
       }
-    };
-  }, []);
+    }
+  }, [])
 
   return useCallback(
     (...args: Parameters<T>) => {
