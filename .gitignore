@@ -1,5 +1,5 @@
-# Ignore build output
-build/
+# Build output
+dist/
 node_modules/
 
 # IDEs and editors
@@ -15,8 +15,11 @@ node_modules/
 /coverage
 /.nyc_output
 
-# Ignore log files
+# Log files
 *.log
 
-# Ignore temporary files
+# Temporary files
 *.tmp
+
+# Environment variables
+.env
